@@ -28,7 +28,7 @@ export default function RegisterForm() {
     (state) => state.BTUserManagementHookReducers
   );
 
-  // kiểm tra trên store có selectedUser ko, nếu có thì setState values = selectedUser
+  // kiểm tra trên store có selectedUser ko, nếu có thì setState state.values = selectedUser
   useEffect(() => {
     if (selectedUser) {
       setState((state) => ({
@@ -37,8 +37,6 @@ export default function RegisterForm() {
       }));
     }
   }, [selectedUser]);
-
-  console.log(state.values);
 
   // dispatch 1 action lên store
   const dispatch = useDispatch();
@@ -51,8 +49,10 @@ export default function RegisterForm() {
     const { name, value } = event.target;
 
     setState({
+      ...state,
       values: { ...state.values, [name]: value },
     });
+    // console.log(event.target);
   };
 
   // submit dữ liệu
@@ -115,6 +115,7 @@ export default function RegisterForm() {
     }
 
     setState({
+      ...state,
       errors: {
         ...state.errors,
         [name]: message,
@@ -123,7 +124,7 @@ export default function RegisterForm() {
   };
 
   // hiển thị value của selectedUser lên form khi bấm edit
-  const { username, fullName, password, email, phoneNumber, type } =
+  const { id, username, fullName, email, password, phoneNumber, type } =
     state.values;
 
   return (
@@ -140,6 +141,8 @@ export default function RegisterForm() {
                 <input
                   title="Username"
                   required
+                  minLength={8}
+                  maxLength={20}
                   type="text"
                   name="username"
                   value={username}
@@ -158,12 +161,15 @@ export default function RegisterForm() {
                 <input
                   title="Full name"
                   required
-                  minLength={4}
-                  maxLength={12}
+                  minLength={3}
+                  maxLength={20}
                   name="fullName"
                   value={fullName}
                   type="text"
                   className="form-control"
+                  pattern='^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
+                    "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" +
+                    "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+$'
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -200,6 +206,7 @@ export default function RegisterForm() {
                   name="phoneNumber"
                   type="text"
                   className="form-control"
+                  pattern="^[0-9]+$"
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />

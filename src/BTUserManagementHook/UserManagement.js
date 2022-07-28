@@ -16,6 +16,7 @@ export default function UserManagement() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setState({
       ...state,
       [name]: value,

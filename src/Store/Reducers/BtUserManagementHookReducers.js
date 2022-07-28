@@ -9,19 +9,19 @@ const DEFAULT_STATE = {
   arrUser: [
     {
       id: 1,
-      password: 123456,
       username: "hoangvu",
       fullName: "vuhuyhoang",
       email: "123@gmail.com",
+      password: 123456,
       phoneNumber: "0939383480",
       type: "Admin",
     },
     {
       id: 2,
-      password: 123456,
       username: "khanhvan",
       fullName: "vokhanhvan",
       email: "456@gmail.com",
+      password: 123456,
       phoneNumber: "0703888805",
       type: "Client",
     },
